@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# VanillaForums Coding Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+As per the requirements, this app allows the user to search the public repositories of any Github user, and display the results in a Grid. Results can be sorted alphabetically (default) or by # of Stars.
 
-## Available Scripts
+## Running the Project
 
-In the project directory, you can run:
+This app was made using create-react-app. In order to run it locally, you should run `npm run start` after installing the corresponding node_modules.
 
-### `yarn start`
+## Caveats
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+While most requirements were met, there was one issue around the requirements to note:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Total Watchers: Github's API returns watchers equal as the number of Star Gazers. No idea exactly why but this seems to be the case for a few years now. Given the limited time I left it as is, I could have gotten this exact number by fetching the data from each repo separately, but i found that would have been too much. So what you see on the grid is both stars and watchers being the same number as that is what Github returns.
 
-### `yarn test`
+Other than this minor issue, plus testing explained below, I think everything which was asked is working as it should.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## Testing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I honestly did try to limit my time to the 4h suggested and realized that I was running already overtime with testing to be done.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I decided to leave it as is and have a brief overview of what I would test explained here:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Header:
 
-### `yarn eject`
+Nothing, it's static content.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### MainLayout:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Fetch: make sure response is ok, and test for 404 case. If 404 then make sure Alert code is triggered.
+- Sorted by Stars array function: test with a standard array making sure that it is copied properly and that the resulting array should be sorted by the stargrazers key.
+- Sort: test that when sort functionality is triggered, that the right data is passed for the grid (alphabethical vs stars)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### SortOptions:  
 
-## Learn More
+Test when a button is clicked, that the right sort setting is passed to the application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### CardList:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Make sure UI built matches a predefined version based on a dummy json including name, description, stargazers, and Watchers
 
-### Code Splitting
+## Everything else
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+All other requirements I believe have been met.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. The UI must be written using React.
+2. The application must use GitHub’s API v3 .
+3. Each repository displayed on the page must include the following information:
+a. Name
+b. Description
+c. Total stargazers
+d. Total watchers
+4. The application UI must be designed to be responsive. A user must be able to perform
+all interactions on a desktop or mobile device.
